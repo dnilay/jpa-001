@@ -1,8 +1,13 @@
 package org.example.employee_app;
 
+import java.lang.System.Logger;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 import org.example.employee_app.model.Employee;
+import org.example.employee_app.repo.EmployeeReporitory;
+import org.example.employee_app.repo.EmployeeRepositoryImpl;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -13,15 +18,27 @@ import org.hibernate.cfg.Configuration;
  */
 public class App 
 {
+
     public static void main( String[] args )
     {
-      SessionFactory sessionFactory=new Configuration().configure().buildSessionFactory();
-      Session session=sessionFactory.openSession();
-      Employee employee=new Employee(new Random().nextInt(1000), "John Doe", 20000.0);
-      session.getTransaction().begin();
-      session.save(employee);
-      session.getTransaction().commit();
-      System.out.println("inserted");
-      System.out.println(session);
+    	try {
+    		EmployeeReporitory employeeReporitory=new EmployeeRepositoryImpl();
+			/*
+			 * Employee employee=new Employee(100, "Marry", 45000);
+			 * System.out.println(employeeReporitory.createEmployee(employee));
+			 */
+    		List<Employee> employees=employeeReporitory.fetchEmployees();
+    		Iterator<Employee> iterator=employees.iterator();
+    		while(iterator.hasNext())
+    		{
+    			System.out.println(iterator.next());
+    		}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+      
+      
     }
 }
