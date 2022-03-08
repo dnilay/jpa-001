@@ -43,4 +43,35 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 		return query.getResultList();
 	}
 
+	@Override
+	public Employee findEmployeeById(int employeeId) {
+		Session session=sessionFactory.openSession();
+		session.getTransaction().begin();
+		Employee employee=session.get(Employee.class, employeeId);
+		session.getTransaction().commit();
+		return employee;
+	}
+
+	@Override
+	public Employee updateEmployee(int employeeId, Employee employee) {
+		Employee employee2=findEmployeeById(employeeId);
+		employee2.setEmployeeName(employee.getEmployeeName());
+		employee2.setSalary(employee.getSalary());
+		Session session=sessionFactory.openSession();
+		session.getTransaction().begin();
+		session.merge(employee2);
+		session.getTransaction().commit();
+		return employee2;
+	}
+
+	@Override
+	public void deleteEmployee(int employeeId) {
+		Employee employee2=findEmployeeById(employeeId);
+		Session session=sessionFactory.openSession();
+		session.getTransaction().begin();
+		session.remove(employee2);
+		session.getTransaction().commit();
+		
+	}
+
 }

@@ -24,4 +24,23 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeRepository.fetchemployees();
 	}
 
+	@Override
+	public Employee findEmployeeById(int employeeId) {
+		// TODO Auto-generated method stub
+		return employeeRepository.findEmployeeById(employeeId);
+	}
+
+	@Override
+	public Employee updateEmployee(int employeeId, Employee employee) {
+		// TODO Auto-generated method stub
+		return employeeRepository.updateEmployee(employeeId, employee);
+		
+	}
+
+	@Override
+	public void deleteEmployee(int employeeId) {
+		// TODO Auto-generated method stub
+		employeeRepository.deleteEmployee(employeeId);
+	}
+
 }

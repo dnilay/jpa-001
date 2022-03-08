@@ -18,6 +18,15 @@ public class Employee {
 	public Employee() {
 		
 	}
+	
+	
+	public Employee(String employeeName, double salary) {
+		super();
+		this.employeeName = employeeName;
+		this.salary = salary;
+	}
+
+
 	public Employee(int employeeId, String employeeName, double salary) {
 		
 		this.employeeId = employeeId;
