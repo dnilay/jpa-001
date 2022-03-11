@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import java.util.List;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -17,12 +19,17 @@ public class HibernateMappintOne2oneuniApplication {
 	public static void main(String[] args) {
 		ApplicationContext context= SpringApplication.run(HibernateMappintOne2oneuniApplication.class, args);
 		
-		InstructorDetail instructorDetail=new InstructorDetail(1, "youtube-channel-1","Coading" );
-		Instructor instructor=new Instructor(1, "John", "Doe", "john@email.com", instructorDetail);
-		InstructorService instructorService=context.getBean("instructorServiceImpl",InstructorService.class);
 		
-		Instructor temp=instructorService.createInstructor(instructor);
-		log.info("Instructor Created {}",temp);
+		InstructorService instructorService=context.getBean("instructorServiceImpl",InstructorService.class);
+		Instructor instructor =new Instructor(1, "Marry", "Public","marry@email.com");
+		InstructorDetail details=new InstructorDetail(1, "channel-1", "Guiter");
+		instructor.setInstructorDetail(details);
+		Instructor i=instructorService.createInstructor(instructor);
+		log.info("Instructor  Created {} {}",i);
+		/*
+		 * List<Instructor> list=instructorService.displayAllInstructor();
+		 * //log.info("{}",list); System.out.println(list);
+		 */
 	}
 
 }
